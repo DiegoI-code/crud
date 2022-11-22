@@ -5,35 +5,17 @@ import { addDoc, collection } from 'firebase/firestore'
 import useFirebase from '../hooks/useFirebase';
 
 
-const { getData, sayHi, getData2 } = useFirebase();
+const { getData, sayHi } = useFirebase();
 
 const PruebaFirebase = () => {
 
-/*     useEffect(() => {
-        console.log("PruebaFirebase rendered");
-    
-      
-    }, [])
-    
-
-    console.log("PruebaFirebase rendered"); */
   
+    
     const fetchData = async () => {
         const result = await getData();
-        if(result.success) {
-          console.log("Result: ", result.json);
-          console.log("Result success");
-        } else {
-          // TODO: show error
-          console.log("Error fetching data")
-        }
-    };
- 
-    const fetchData2 = async () => {
-        const result = await getData2();
-        console.log("Result: ", result);
+        //console.log("Result: ", result);
         if(result) {
-          console.log("Result: ", result.json);
+          console.log("Result: ", result);
           console.log("Result success");
         } else {
           // TODO: show error
@@ -43,8 +25,7 @@ const PruebaFirebase = () => {
 
 
     sayHi();
-   // fetchData();
-    fetchData2();
+    fetchData();
 
  
 

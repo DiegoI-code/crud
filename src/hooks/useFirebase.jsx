@@ -1,36 +1,28 @@
-import React from 'react'
+import { React, useState } from 'react'
 import db from '../service/Firebase'
-import { addDoc, collection, getFirestore, getDocs } from 'firebase/firestore'
+import { addDoc, collection, getFirestore, getDocs, query } from 'firebase/firestore'
+
+
 
 
 export default function useFirebase () {
   
-  
-  /* const getData2 = async () => {
+  const getData = async () => {
+    let dataArray = []; 
     try {
-      const db = getFirestore();
+      
+      const q = collection(db, '1');
+      const querySnapshot = await getDocs(q);
 
-    
-    await getDocs(db).then((snapshot) => {
-      if (snapshot.size === 0) {
-        console.log("no data")
-      } else {
-        
-        console.log(snapshot);
-      }
-    })
-    } catch (error) {
-      console.log(error)
-    }
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        //console.log(doc.id, " => ", doc.data());
+        dataArray.push(doc.data());
+      });
+      return dataArray;
 
-  }; */
-  
-  const getData2 = async () => {
-    try {
-      const result = collection(db, '1');
-      let resultData = await getDocs(result);
-      console.log(resultData.data)
-      return resultData;
+      /* console.log("resultdata: ", resultData.data)
+      return resultData; */
   
     } catch (error) {
       console.log(error)
@@ -39,30 +31,12 @@ export default function useFirebase () {
   };
 
 
-
-
-  const getData = async () => {
-
-    try {
-        const col = collection(db, "1")
-        //const order = await addDoc(col, datos)
-        console.log("Accediendo a coleccion");
-        console.log("Database: ", col);
-
-    } catch (error) {
-        console.log(error);
-    }
-
-
-  }
-
   const sayHi = () => {
     console.log("Hi!");
   }
   
   return {
     getData,
-    getData2,
     sayHi,
     
   };
