@@ -3,6 +3,8 @@ import db from '../service/Firebase'
 import { addDoc, collection } from 'firebase/firestore'
 //import { getData, sayHi } from "../hooks/useFirebase";
 import useFirebase from '../hooks/useFirebase';
+import mockData from '../mock/mockData';
+import TableComponent from './TableComponent';
 
 
 const { getData, sayHi } = useFirebase();
@@ -31,7 +33,9 @@ const PruebaFirebase = () => {
 
 
   return (
-    <div>pruebaFirebase</div>
+    <>
+      <TableComponent/>
+    </>
   )
 }
 
