@@ -18,8 +18,6 @@ const [fetchedData, setfetchedData ] = useState();
         const result = await getData();
         //console.log("Result: ", result);
         if(result) {
-          console.log("Result: ", result);
-          console.log("Result success");
           setfetchedData(result);
         } else {
           // TODO: show error
@@ -28,7 +26,7 @@ const [fetchedData, setfetchedData ] = useState();
     };
 
 
-    sayHi();
+    
     useEffect(() => {
       fetchData();
     }, []);
@@ -40,8 +38,8 @@ const [fetchedData, setfetchedData ] = useState();
     <>
     {typeof fetchedData === "undefined" ? 
     <>
-      <p>Mockdata: no cargo data de API</p>
-      {/* <TableComponent tableData={mockData}/> */} 
+      <p>Esperando data de API</p> 
+      {/* Aca va un skeleton */}
       </>
        : 
       <TableComponent tableData={fetchedData}/>

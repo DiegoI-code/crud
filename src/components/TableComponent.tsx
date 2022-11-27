@@ -43,7 +43,7 @@ function createData(
   };
 }
 
-const rows = [];
+const rowsArray = [];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -238,32 +238,15 @@ export default function TableComponent({tableData} : any) {
   const dataArray = Object.values(passedData);
   const dataKeys = Object.keys(passedData);
 
-  console.log("tabledata", tableData);
-  console.log("tabledata typeoif", typeof tableData);
-  console.log("tabledata.tabledatat", tableData.tableData);
-  console.log("passeddata", passedData);
-  console.log("passeddata typeoif", typeof passedData);
-  console.log("passeddata.tabledatat", passedData.tableData);
-  console.log("dataArray", dataArray);
-  console.log("typeof dataArray", typeof dataArray);
-  console.log("dataKeys", dataKeys);
-  console.log("typeof dataKeys", typeof dataKeys);
-
-  // USAR PASSEDdATA QUE ES UN OBJETO
-
  React.useEffect(() => {
     passedData.forEach(element => {
-     rows.push(createData(element.name, element.Category, element.Abilities, element.Weaknesses));
+     rowsArray.push(createData(element.name, element.Category, element.Abilities, element.Weaknesses));
    }); 
-   console.log("rows: ", rows);
-   setRowsContent(rows);
+   
+   setRows(rowsArray);
  }, [])
  
-  
- 
-
-
-  const handleRequestSort = (
+   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
     property: keyof Data,
   ) => {
