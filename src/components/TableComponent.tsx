@@ -20,6 +20,11 @@ import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
+import NextLink from 'next/link';
+import { Button } from "@mui/material";
+import Iconify from './Iconify';
+
+
 
 interface Data {
   name: string;
@@ -42,7 +47,7 @@ function createData(
   };
 }
 
-const rowsArray = [];
+const rowsArray: any = [];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -142,6 +147,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
     };
 
   return (
+    
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
@@ -218,7 +224,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
           id="tableTitle"
           component="div"
         >
-          Nutrition
+          Pokemons
         </Typography>
       )}
       {numSelected > 0 ? (
@@ -252,7 +258,7 @@ export default function TableComponent({ tableData }: any) {
   const dataArray = Object.values(passedData);
   const dataKeys = Object.keys(passedData);
 
-  React.useEffect(() => {
+  const populate = () => {
     passedData.forEach((element) => {
       rowsArray.push(
         createData(
@@ -263,8 +269,13 @@ export default function TableComponent({ tableData }: any) {
         )
       );
     });
-
     setRows(rowsArray);
+  }
+
+
+  React.useEffect(() => {
+    //console.log(passedData)
+    populate();
   }, []);
 
   const handleRequestSort = (
@@ -328,6 +339,12 @@ export default function TableComponent({ tableData }: any) {
 
   return (
     <>
+<NextLink href='/new' passHref>
+              <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
+                Nuevo Pokemon
+              </Button>
+  </NextLink>
+
       {typeof rows === "undefined" ? (
         <>
           <p>Cargando</p>
