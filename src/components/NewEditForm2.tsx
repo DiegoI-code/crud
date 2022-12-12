@@ -9,6 +9,24 @@ import { Button } from "@mui/material";
 import Iconify from './Iconify';
 
 export default function NewEditForm2() {
+
+  const [data, setData] = React.useState();
+
+const onChangeName = (event) => {
+  setData(event.target.value);
+};
+
+const handleClick = () => {
+  console.log(data);
+
+};
+
+
+
+
+
+
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -24,6 +42,7 @@ export default function NewEditForm2() {
             fullWidth
             /* autoComplete="given-name" */
             variant="standard"
+            onChange={onChangeName}
           />
         </Grid>
         <Grid item xs={12}>
@@ -65,11 +84,9 @@ export default function NewEditForm2() {
                 Back to Home
               </Button>
   </NextLink>
-        <NextLink href='/' passHref>
-              <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
-                Back to Home
+              <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />} onClick={handleClick}>
+                Confirm
               </Button>
-  </NextLink>
         </Grid>
         
       </Grid>
