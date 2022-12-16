@@ -259,7 +259,7 @@ export default function TableComponent({ tableData }: any) {
   const dataKeys = Object.keys(passedData);
 
   const populate = () => {
-    passedData.forEach((element) => {
+    /* passedData.forEach((element) => {
       rowsArray.push(
         createData(
           element.name,
@@ -268,9 +268,15 @@ export default function TableComponent({ tableData }: any) {
           element.Weaknesses
         )
       );
-    });
+    }); */
+
+    const rowsArray: any = dataArray.map((item: any) =>
+    createData(item.name, item.Category, item.Abilities, item.Weaknesses)
+  );
+
     setRows(rowsArray);
   }
+
 
 
   React.useEffect(() => {

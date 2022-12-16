@@ -29,7 +29,22 @@ export default function useFirebase() {
     }
   };
 
+  const addData = async ([data]) => {
+
+    try {
+        const col = collection(db, "1")
+        const add = await addDoc(col, data)
+        console.log(add.id)
+
+    } catch (error) {
+        console.log(error);
+    }
+
+
+  }
+
   return {
     getData,
+    addData,
   };
 }

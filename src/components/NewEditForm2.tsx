@@ -7,17 +7,27 @@ import Checkbox from '@mui/material/Checkbox';
 import NextLink from 'next/link';
 import { Button } from "@mui/material";
 import Iconify from './Iconify';
+import useFirebase from "../hooks/useFirebase";
+
+const { addData } = useFirebase();
 
 export default function NewEditForm2() {
 
-  const [data, setData] = React.useState();
+  const [data, setData] = React.useState({});
 
-const onChangeName = (event) => {
-  setData(event.target.value);
+const onChange = (event) => {
+  setData(
+    {
+      ...data,
+      [event.target.name]: event.target.value
+    }
+  );
+
 };
 
 const handleClick = () => {
   console.log(data);
+  addData([data]);
 
 };
 
@@ -42,40 +52,43 @@ const handleClick = () => {
             fullWidth
             /* autoComplete="given-name" */
             variant="standard"
-            onChange={onChangeName}
+            onChange={onChange}
           />
         </Grid>
         <Grid item xs={12}>
           <TextField
             required
-            id="category"
-            name="category"
+            id="Category"
+            name="Category"
             label="Category"
             fullWidth
             /* autoComplete="family-name" */
             variant="standard"
+            onChange={onChange}
           />
         </Grid>
         <Grid item xs={12}>
           <TextField
             required
-            id="ability"
-            name="ability"
-            label="Ability"
+            id="Abilities"
+            name="Abilities"
+            label="Abilities"
             fullWidth
             /* autoComplete="shipping address-line1" */
             variant="standard"
+            onChange={onChange}
           />
         </Grid>
         <Grid item xs={12}>
           <TextField  
             required
-            id="weakness"
-            name="weakness"
-            label="Weakness"
+            id="Weaknesses"
+            name="Weaknesses"
+            label="Weaknesses"
             fullWidth
             /* autoComplete="shipping address-line2" */
             variant="standard"
+            onChange={onChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
