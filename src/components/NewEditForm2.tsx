@@ -8,11 +8,14 @@ import NextLink from 'next/link';
 import { Button } from "@mui/material";
 import Iconify from './Iconify';
 import useFirebase from "../hooks/useFirebase";
+import alerts from "./alerts/alerts";
+
 
 const { addData } = useFirebase();
 
 export default function NewEditForm2() {
-
+  
+  const { addDataSuccess } = alerts();
   const [data, setData] = React.useState({});
 
 const onChange = (event) => {
@@ -28,6 +31,8 @@ const onChange = (event) => {
 const handleClick = () => {
   console.log(data);
   addData([data]);
+  /* alert("Pokemon agregado!"); */
+  /* addDataSuccess(); */
 
 };
 

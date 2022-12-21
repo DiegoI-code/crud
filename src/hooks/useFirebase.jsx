@@ -7,8 +7,19 @@ import {
   getDocs,
   query,
 } from "firebase/firestore";
+import { useRouter } from 'next/router';
+
+
+
+
+
 
 export default function useFirebase() {
+  
+  //const router = useRouter();
+  
+  
+  
   const getData = async () => {
     let dataArray = [];
     try {
@@ -18,7 +29,12 @@ export default function useFirebase() {
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         //console.log(doc.id, " => ", doc.data());
-        dataArray.push(doc.data());
+        /* console.log("Doc ID", doc.id, "doc data", doc.data()) */
+        let dataObj = doc.data();
+        dataObj.id = doc.id;
+        console.log("dataObj", dataObj);
+        dataArray.push(dataObj);
+        
       });
       return dataArray;
 
@@ -34,7 +50,9 @@ export default function useFirebase() {
     try {
         const col = collection(db, "1")
         const add = await addDoc(col, data)
-        console.log(add.id)
+        console.log(add.id);
+        //router.push('/');
+        alert("Pokemon agregado!");
 
     } catch (error) {
         console.log(error);
@@ -42,6 +60,24 @@ export default function useFirebase() {
 
 
   }
+
+  const delData = async (id) => {
+    
+    const col = collection(db, "1")
+    
+    const docRef = col.doc(id);
+  
+  // Delete the document
+  docRef.delete()
+    .then(() => {
+      console.log('Document successfully deleted!');
+    })
+    .catch((error) => {
+      console.error('Error deleting document: ', error);
+    });
+
+  }
+
 
   return {
     getData,

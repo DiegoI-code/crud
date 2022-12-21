@@ -23,10 +23,12 @@ import { visuallyHidden } from "@mui/utils";
 import NextLink from 'next/link';
 import { Button } from "@mui/material";
 import Iconify from './Iconify';
+import CreateIcon from '@mui/icons-material/Create';
 
 
-
+let selectedContext = [];
 interface Data {
+  id: string;
   name: string;
   Category: string;
   Abilities: string;
@@ -34,12 +36,14 @@ interface Data {
 }
 
 function createData(
+  id: string,
   name: string,
   Category: string,
   Abilities: string,
   Weaknesses: string
 ): Data {
   return {
+    id,
     name,
     Category,
     Abilities,
@@ -57,6 +61,10 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
     return 1;
   }
   return 0;
+}
+
+function deleteSelected (data: any) {
+  console.log("Deleting ", data);
 }
 
 type Order = "asc" | "desc";
@@ -229,7 +237,8 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
       )}
       {numSelected > 0 ? (
         <Tooltip title="Delete">
-          <IconButton>
+          <IconButton
+          onClick={()=> deleteSelected(selectedContext)}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
@@ -247,42 +256,40 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
 export default function TableComponent({ tableData }: any) {
   const [order, setOrder] = React.useState<Order>("asc");
   const [orderBy, setOrderBy] = React.useState<keyof Data>("name");
-  const [selected, setSelected] = React.useState<readonly string[]>([]);
+  const [selected, setSelected] = React.useState<string[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [rows, setRows] = React.useState();
 
   const passedData = tableData;
-
   const dataArray = Object.values(passedData);
   const dataKeys = Object.keys(passedData);
 
   const populate = () => {
-    /* passedData.forEach((element) => {
-      rowsArray.push(
-        createData(
-          element.name,
-          element.Category,
-          element.Abilities,
-          element.Weaknesses
-        )
-      );
-    }); */
-
+    
     const rowsArray: any = dataArray.map((item: any) =>
-    createData(item.name, item.Category, item.Abilities, item.Weaknesses)
+    createData(item.id, item.name, item.Category, item.Abilities, item.Weaknesses)
   );
 
     setRows(rowsArray);
   }
 
+  const editButton = (value: string) => {
+    console.log("Edit Button pressed", value);
+  }
 
+ 
 
   React.useEffect(() => {
     //console.log(passedData)
     populate();
   }, []);
+  
+
+  React.useEffect(() => {
+    selectedContext = selected;
+  }, [selected]);
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -387,16 +394,18 @@ export default function TableComponent({ tableData }: any) {
                         const labelId = `enhanced-table-checkbox-${index}`;
 
                         return (
+                          
                           <TableRow
                             hover
+                            
+                          >
+                            <TableCell padding="checkbox"
                             onClick={(event) => handleClick(event, row.name)}
                             role="checkbox"
                             aria-checked={isItemSelected}
                             tabIndex={-1}
                             key={row.name}
-                            selected={isItemSelected}
-                          >
-                            <TableCell padding="checkbox">
+                            selected={isItemSelected}>
                               <Checkbox
                                 color="primary"
                                 checked={isItemSelected}
@@ -418,6 +427,20 @@ export default function TableComponent({ tableData }: any) {
                             <TableCell align="right">
                               {row.Weaknesses}
                             </TableCell>
+                            {/* Added menu */}
+                            
+                            <TableCell align="right">
+                            <IconButton
+                            onClick={() => editButton(row.id)}>
+                              <CreateIcon/>
+                            </IconButton>
+                            </TableCell>
+                            
+                            
+                            
+                            
+
+
                           </TableRow>
                         );
                       })}
