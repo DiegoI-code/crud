@@ -20,13 +20,11 @@ import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
-import NextLink from "next/link";
+import NextLink from 'next/link';
 import { Button } from "@mui/material";
-import Iconify from "./Iconify";
-import CreateIcon from "@mui/icons-material/Create";
-import useFirebase from "../hooks/useFirebase";
+import Iconify from './Iconify';
+import CreateIcon from '@mui/icons-material/Create';
 
-const { delData } = useFirebase();
 
 let selectedContext: any[] = [];
 
@@ -66,16 +64,8 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   return 0;
 }
 
-function deleteSelected(data: any) {
-  let indexArr = [];
-  data.forEach((element) => {
-    const object = element.find((obj) => obj.name === data);
-    const value = object.id;
-    indexArr.push(value);
-
-    /* delData(element); */
-  });
-  console.log("indexArr ", indexArr);
+function deleteSelected (data: any) {
+  console.log("Deleting ", data);
 }
 
 type Order = "asc" | "desc";
@@ -166,6 +156,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
     };
 
   return (
+    
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
@@ -247,7 +238,8 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
       )}
       {numSelected > 0 ? (
         <Tooltip title="Delete">
-          <IconButton onClick={() => deleteSelected(selectedContext)}>
+          <IconButton
+          onClick={()=> deleteSelected(selectedContext)}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
@@ -276,53 +268,28 @@ export default function TableComponent({ tableData }: any) {
   const dataKeys = Object.keys(passedData);
 
   const populate = () => {
+    
     const rowsArray: any = dataArray.map((item: any) =>
-      createData(
-        item.id,
-        item.name,
-        item.Category,
-        item.Abilities,
-        item.Weaknesses
-      )
-    );
+    createData(item.id, item.name, item.Category, item.Abilities, item.Weaknesses)
+  );
 
     setRows(rowsArray);
-  };
+  }
 
   const editButton = (value: string) => {
     console.log("Edit Button pressed", value);
-  };
+  }
+
+ 
 
   React.useEffect(() => {
     //console.log(passedData)
     populate();
   }, []);
+  
 
-  // Builds an array of selected items id
   React.useEffect(() => {
-    /* let selectedIdArr: any[] = [];
-    selected.forEach((element) => {
-      const index = tableData.findIndex((obj) => obj.name == element);
-      if (!selectedContext.includes(tableData[index].id)) {
-        selectedIdArr.push(tableData[index].id);
-      }
-
-    });
-    if (selectedIdArr.length > 0) {
-      selectedIdArr.forEach((element) => {
-        const index = tableData.findIndex((obj) => obj.id == element);
-        const elementIndex = selectedIdArr.indexOf(element);
-        if (!selected.includes(tableData[index].name)) {
-          selectedIdArr.splice(elementIndex, 1);
-        }
-      });
-    } */
-
     selectedContext = selected;
-    /* console.log("tableData", tableData);
-    console.log("selectedContext armado ", selectedContext);
-    console.log("selected", selected);
- */
   }, [selected]);
 
   const handleRequestSort = (
@@ -386,14 +353,11 @@ export default function TableComponent({ tableData }: any) {
 
   return (
     <>
-      <NextLink href="/new" passHref>
-        <Button
-          variant="contained"
-          startIcon={<Iconify icon="eva:plus-fill" />}
-        >
-          Nuevo Pokemon
-        </Button>
-      </NextLink>
+<NextLink href='/new' passHref>
+              <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
+                Nuevo Pokemon
+              </Button>
+  </NextLink>
 
       {typeof rows === "undefined" ? (
         <>
@@ -431,16 +395,18 @@ export default function TableComponent({ tableData }: any) {
                         const labelId = `enhanced-table-checkbox-${index}`;
 
                         return (
-                          <TableRow hover>
-                            <TableCell
-                              padding="checkbox"
-                              onClick={(event) => handleClick(event, row.name)}
-                              role="checkbox"
-                              aria-checked={isItemSelected}
-                              tabIndex={-1}
-                              key={row.name}
-                              selected={isItemSelected}
-                            >
+                          
+                          <TableRow
+                            hover
+                            
+                          >
+                            <TableCell padding="checkbox"
+                            onClick={(event) => handleClick(event, row.name)}
+                            role="checkbox"
+                            aria-checked={isItemSelected}
+                            tabIndex={-1}
+                            key={row.name}
+                            selected={isItemSelected}>
                               <Checkbox
                                 color="primary"
                                 checked={isItemSelected}
@@ -463,12 +429,19 @@ export default function TableComponent({ tableData }: any) {
                               {row.Weaknesses}
                             </TableCell>
                             {/* Added menu */}
-
+                            
                             <TableCell align="right">
-                              <IconButton onClick={() => editButton(row.id)}>
-                                <CreateIcon />
-                              </IconButton>
+                            <IconButton
+                            onClick={() => editButton(row.id)}>
+                              <CreateIcon/>
+                            </IconButton>
                             </TableCell>
+                            
+                            
+                            
+                            
+
+
                           </TableRow>
                         );
                       })}
