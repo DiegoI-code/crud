@@ -300,7 +300,7 @@ export default function TableComponent({ tableData }: any) {
 
   // Builds an array of selected items id
   React.useEffect(() => {
-    /* let selectedIdArr: any[] = [];
+    let selectedIdArr: any[] = [];
     selected.forEach((element) => {
       const index = tableData.findIndex((obj) => obj.name == element);
       if (!selectedContext.includes(tableData[index].id)) {
@@ -308,7 +308,7 @@ export default function TableComponent({ tableData }: any) {
       }
 
     });
-    if (selectedIdArr.length > 0) {
+    /* if (selectedIdArr.length > 0) {
       selectedIdArr.forEach((element) => {
         const index = tableData.findIndex((obj) => obj.id == element);
         const elementIndex = selectedIdArr.indexOf(element);
@@ -318,11 +318,13 @@ export default function TableComponent({ tableData }: any) {
       });
     } */
 
-    selectedContext = selected;
+    /* selectedContext = selected; */
     /* console.log("tableData", tableData);
     console.log("selectedContext armado ", selectedContext);
     console.log("selected", selected);
+    
  */
+console.log("selectedIdArr, ", selectedIdArr);
   }, [selected]);
 
   const handleRequestSort = (
