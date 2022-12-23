@@ -48,12 +48,12 @@ export default function useFirebase() {
 
   const delData = async (id) => {
     //const query = collection(db, "1").where('name', '==', id);
-    const pokeRef = collection(db, "1");
+    /* const pokeRef = collection(db, "1"); */
 
     /* const q = query(pokeRef, where("name", "==", 'Charmander'));
     console.log(q); */
 
-    console.log(pokeRef);
+    console.log(id);
     
     
 

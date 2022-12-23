@@ -30,6 +30,8 @@ const { delData } = useFirebase();
 
 let selectedContext: any[] = [];
 
+let selectedIdArr: any[] = [];
+
 interface Data {
   id: string;
   name: string;
@@ -68,6 +70,7 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
 
 function deleteSelected(data: any) {
   let indexArr = [];
+  
   data.forEach((element) => {
     const object = element.find((obj) => obj.name === data);
     const value = object.id;
@@ -76,6 +79,7 @@ function deleteSelected(data: any) {
     /* delData(element); */
   });
   console.log("indexArr ", indexArr);
+  delData(indexArr);
 }
 
 type Order = "asc" | "desc";
@@ -300,7 +304,7 @@ export default function TableComponent({ tableData }: any) {
 
   // Builds an array of selected items id
   React.useEffect(() => {
-    let selectedIdArr: any[] = [];
+    /* let selectedIdArr: any[] = []; */
     selected.forEach((element) => {
       const index = tableData.findIndex((obj) => obj.name == element);
       if (!selectedContext.includes(tableData[index].id)) {
@@ -324,7 +328,7 @@ export default function TableComponent({ tableData }: any) {
     console.log("selected", selected);
     
  */
-console.log("selectedIdArr, ", selectedIdArr);
+console.log("selectedIdArr, ", selectedIdArr);                
   }, [selected]);
 
   const handleRequestSort = (
