@@ -26,6 +26,7 @@ import Iconify from "./Iconify";
 import CreateIcon from "@mui/icons-material/Create";
 import useFirebase from "../hooks/useFirebase";
 
+
 const { delData } = useFirebase();
 
 let selectedContext: any[] = [];
@@ -68,18 +69,20 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   return 0;
 }
 
-function deleteSelected(data: any) {
-  let indexArr = [];
+function deleteSelected() {
   
-  data.forEach((element) => {
-    const object = element.find((obj) => obj.name === data);
+  
+  selectedIdArr.forEach((element) => {
+    /* const object = element.find((obj) => obj.name === data);
     const value = object.id;
-    indexArr.push(value);
+    indexArr.push(value); */
+    console.log("element in deleteSelected", element);
+    delData(element);
 
     /* delData(element); */
   });
-  console.log("indexArr ", indexArr);
-  delData(indexArr);
+  /* console.log("indexArr ", indexArr);
+  delData(indexArr); */
 }
 
 type Order = "asc" | "desc";
@@ -251,7 +254,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
       )}
       {numSelected > 0 ? (
         <Tooltip title="Delete">
-          <IconButton onClick={() => deleteSelected(selectedContext)}>
+          <IconButton onClick={() => deleteSelected()}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
@@ -304,7 +307,7 @@ export default function TableComponent({ tableData }: any) {
 
   // Builds an array of selected items id
   React.useEffect(() => {
-    /* let selectedIdArr: any[] = []; */
+    selectedIdArr = [];
     selected.forEach((element) => {
       const index = tableData.findIndex((obj) => obj.name == element);
       if (!selectedContext.includes(tableData[index].id)) {
