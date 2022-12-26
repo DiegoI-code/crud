@@ -12,6 +12,7 @@ import {
   doc,
   col,
   deleteDoc,
+  setDoc,
 } from "firebase/firestore";
 
 
@@ -37,7 +38,7 @@ export default function useFirebase() {
 
   const getDoc = async (id) => {
     console.log("id en getDoc, ", id);
-    
+
     
   };
 
@@ -52,6 +53,26 @@ export default function useFirebase() {
       console.log(error);
     }
   };
+  
+  const editData = async ([data]) => {
+    try {
+      const col = collection(db, "1", data.id);
+      //const add = await addDoc(col, data);
+      /* console.log(add.id); */
+      console.log("data id en editData, ", data.id);
+
+      await setDoc(doc(db, "1", data.id), {
+        name: data.name,
+        Category: data.Category,
+        Abilities: data.Abilities,
+        Weaknesses: data.Weaknesses
+      });
+
+
+    } catch (error) {
+      console.log("Edit failed! ", error);
+    } 
+  };
 
   const delData = async (id) => {
     console.log("elemento en delData", id);
@@ -63,5 +84,6 @@ export default function useFirebase() {
     addData,
     delData,
     getDoc,
+    editData,
   };
 }

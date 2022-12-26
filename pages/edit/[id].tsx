@@ -7,6 +7,8 @@ import { Button } from "@mui/material";
 import Iconify from "../../src/components/Iconify";
 import useFirebase from "../../src/hooks/useFirebase";
 import { useEffect, useState } from "react";
+import EditForm from "../../src/components/EditForm";
+
 
 // ----------------------------------------------------------------------
 
@@ -52,7 +54,9 @@ export default function Edit() {
   return (
     
     <>
-    <h1>Edit id {currentId}</h1>
+    <Box sx={{ width: "50%" }}>
+    <Paper sx={{ width: "100%", mb: 2 }}>
+    {/* <h1>Edit id {currentId}</h1> */}
     {typeof selected === "undefined" ? (
       <>
         <p>Esperando data de API</p>
@@ -61,9 +65,8 @@ export default function Edit() {
     ) : (
       <>
       
-       <p>Selected name: {selected.name}</p>
-        <p>Selected cat: {selected.Category}</p>
-        <p>Selected weak: {selected.Weaknesses}</p>
+      
+        <EditForm data={selected}/>
        
       </>
 
@@ -77,6 +80,8 @@ export default function Edit() {
           Back to Home
         </Button>
       </NextLink>
+      </Paper>
+      </Box> 
   </>
 
 
