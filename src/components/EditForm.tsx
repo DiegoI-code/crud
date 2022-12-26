@@ -25,7 +25,7 @@ export default function EditForm(selected: any) {
   console.log(data);
 
 
-  const onChange = (event) => {
+  const onChange = (event: any) => {
   setData(
     {
       ...data,
