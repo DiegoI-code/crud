@@ -72,13 +72,15 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   return 0;
 }
 
+
+
 function deleteSelected() {
   //const { directHome } = goHome();
 
   selectedIdArr.forEach((element) => {
   delData(element);
   });
-  /* directHome(); */
+  //directHome();
 };
 
 type Order = "asc" | "desc";
@@ -403,7 +405,7 @@ export default function TableComponent({ tableData }: any) {
           variant="contained"
           startIcon={<Iconify icon="eva:plus-fill" />}
         >
-          Nuevo Pokemon
+          Add New Pokemon
         </Button>
       </NextLink>
 
@@ -443,7 +445,7 @@ export default function TableComponent({ tableData }: any) {
                         const labelId = `enhanced-table-checkbox-${index}`;
 
                         return (
-                          <TableRow hover>
+                          <TableRow hover  key={row.id}>
                             <TableCell
                               padding="checkbox"
                               onClick={(event) => handleClick(event, row.name)}

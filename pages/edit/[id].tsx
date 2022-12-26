@@ -14,13 +14,6 @@ import EditForm from "../../src/components/EditForm";
 
 export default function Edit() {
   const [selected, setSelected] = useState();
-
-  /* <Box sx={{ width: "50%" }}>
-           <Paper sx={{ width: "100%", mb: 2 }}>
-              <NewEditForm2/>
-            </Paper>
-      </Box> */
-  
   const router = useRouter();
   const currentId = router.query.id;
   
@@ -31,7 +24,7 @@ export default function Edit() {
     if (result) {
 
       const obj = result.find(x => x.id === currentId);
-      console.log(obj);
+      //console.log(obj);
       setSelected(obj);
     } else {
       // TODO: show error
@@ -44,12 +37,7 @@ export default function Edit() {
     
   }, [])
   
-    
-
  
-  
-
-  //getDoc(currentId);
 
   return (
     

@@ -48,7 +48,7 @@ export default function useFirebase() {
       const add = await addDoc(col, data);
       console.log(add.id);
 
-      alert("Pokemon agregado!");
+      //alert("Pokemon agregado!");
     } catch (error) {
       console.log(error);
     }
