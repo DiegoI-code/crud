@@ -25,6 +25,8 @@ import { Button } from "@mui/material";
 import Iconify from "./Iconify";
 import CreateIcon from "@mui/icons-material/Create";
 import useFirebase from "../hooks/useFirebase";
+import { useRouter } from 'next/router'
+
 
 
 const { delData } = useFirebase();
@@ -73,16 +75,11 @@ function deleteSelected() {
   
   
   selectedIdArr.forEach((element) => {
-    /* const object = element.find((obj) => obj.name === data);
-    const value = object.id;
-    indexArr.push(value); */
+    
     console.log("element in deleteSelected", element);
     delData(element);
 
-    /* delData(element); */
   });
-  /* console.log("indexArr ", indexArr);
-  delData(indexArr); */
 }
 
 type Order = "asc" | "desc";
@@ -282,6 +279,9 @@ export default function TableComponent({ tableData }: any) {
   const dataArray = Object.values(passedData);
   const dataKeys = Object.keys(passedData);
 
+  const router = useRouter();
+
+
   const populate = () => {
     const rowsArray: any = dataArray.map((item: any) =>
       createData(
@@ -297,7 +297,9 @@ export default function TableComponent({ tableData }: any) {
   };
 
   const editButton = (value: string) => {
+
     console.log("Edit Button pressed", value);
+    router.push(`/edit/${value}`);
   };
 
   React.useEffect(() => {
@@ -331,7 +333,7 @@ export default function TableComponent({ tableData }: any) {
     console.log("selected", selected);
     
  */
-console.log("selectedIdArr, ", selectedIdArr);                
+//console.log("selectedIdArr, ", selectedIdArr);                
   }, [selected]);
 
   const handleRequestSort = (

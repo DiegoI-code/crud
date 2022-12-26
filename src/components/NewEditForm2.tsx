@@ -9,6 +9,7 @@ import { Button } from "@mui/material";
 import Iconify from './Iconify';
 import useFirebase from "../hooks/useFirebase";
 import alerts from "./alerts/alerts";
+import { useRouter } from 'next/router'
 
 
 const { addData } = useFirebase();
@@ -17,6 +18,8 @@ export default function NewEditForm2() {
   
   const { addDataSuccess } = alerts();
   const [data, setData] = React.useState({});
+  const [added, setAdded] = React.useState(false);
+  const router = useRouter();
 
 const onChange = (event) => {
   setData(
@@ -31,12 +34,11 @@ const onChange = (event) => {
 const handleClick = () => {
   console.log(data);
   addData([data]);
-  /* alert("Pokemon agregado!"); */
-  /* addDataSuccess(); */
+  setAdded(true);
+  router.push('/')
+  
 
 };
-
-
 
 
 
