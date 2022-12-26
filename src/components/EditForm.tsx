@@ -15,7 +15,7 @@ import { useRouter } from 'next/router'
 const { editData } = useFirebase();
 
 export default function EditForm(selected: any) {
-  console.log("selected in EditForm, ", selected.data);
+  //console.log("selected in EditForm, ", selected.data);
   const selectedPok = selected.data;
   const { addDataSuccess } = alerts();
   const [data, setData] = React.useState(selectedPok);
@@ -32,12 +32,12 @@ export default function EditForm(selected: any) {
       [event.target.name]: event.target.value
     }
     );
-    console.log(data);
+    //console.log(data);
 
 };
 
 const handleClick = () => {
-  console.log(data);
+  //console.log(data);
   editData([data]);
   setAdded(true);
   router.push('/')

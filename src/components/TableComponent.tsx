@@ -25,7 +25,8 @@ import { Button } from "@mui/material";
 import Iconify from "./Iconify";
 import CreateIcon from "@mui/icons-material/Create";
 import useFirebase from "../hooks/useFirebase";
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
+import goHome from "../hooks/goHome";
 
 
 
@@ -72,15 +73,13 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
 }
 
 function deleteSelected() {
-  
-  
-  selectedIdArr.forEach((element) => {
-    
-    console.log("element in deleteSelected", element);
-    delData(element);
+  //const { directHome } = goHome();
 
+  selectedIdArr.forEach((element) => {
+  delData(element);
   });
-}
+  /* directHome(); */
+};
 
 type Order = "asc" | "desc";
 
@@ -280,6 +279,8 @@ export default function TableComponent({ tableData }: any) {
   const dataKeys = Object.keys(passedData);
 
   const router = useRouter();
+
+  
 
 
   const populate = () => {

@@ -32,7 +32,7 @@ const onChange = (event) => {
 };
 
 const handleClick = () => {
-  console.log(data);
+  //console.log(data);
   addData([data]);
   setAdded(true);
   router.push('/')

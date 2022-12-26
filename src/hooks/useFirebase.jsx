@@ -56,10 +56,8 @@ export default function useFirebase() {
   
   const editData = async ([data]) => {
     try {
-      const col = collection(db, "1", data.id);
-      //const add = await addDoc(col, data);
-      /* console.log(add.id); */
-      console.log("data id en editData, ", data.id);
+     
+      //console.log("data id en editData, ", data.id);
 
       await setDoc(doc(db, "1", data.id), {
         name: data.name,
