@@ -19,7 +19,7 @@ export default function NewEditForm2() {
   const [added, setAdded] = React.useState(false);
   const router = useRouter();
 
-  const onChange = (event) => {
+  const onChange = (event: any) => {
     setData({
       ...data,
       [event.target.name]: event.target.value,

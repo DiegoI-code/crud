@@ -11,16 +11,11 @@ import Iconify from './Iconify';
 import useFirebase from "../hooks/useFirebase";
 import alerts from "./alerts/alerts";
 import { useRouter } from 'next/router'
-//import { GlobalContext } from '../providers/GlobalContextProvider';
 
 
 
 export default function EditForm(selected: any) {
   const { editData } = useFirebase();
-  
-/*   const {dataCont} = useContext(GlobalContext);
-  console.log(dataCont); */
-  
   const selectedPok = selected.data;
   const { addDataSuccess } = alerts();
   const [data, setData] = React.useState(selectedPok);

@@ -206,7 +206,6 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
 
   function deleteSelected() {
     selectedIdArr.forEach((element) => {
-      console.log(element);
       delData(element);
     });
     window.location.reload();
@@ -269,7 +268,7 @@ export default function TableComponent({ tableData }: any) {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [rows, setRows] = React.useState();
+  const [rows, setRows] = React.useState<Data[]>();
 
   const passedData = tableData;
   const dataArray = Object.values(passedData);
@@ -302,7 +301,7 @@ export default function TableComponent({ tableData }: any) {
   React.useEffect(() => {
     selectedIdArr = [];
     selected.forEach((element) => {
-      const index = tableData.findIndex((obj) => obj.name == element);
+      const index = tableData.findIndex((obj: any) => obj.name == element);
       if (!selectedContext.includes(tableData[index].id)) {
         selectedIdArr.push(tableData[index].id);
       }
@@ -320,7 +319,7 @@ export default function TableComponent({ tableData }: any) {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.name);
+      const newSelected = rows!.map((n) => n.name);
       setSelected(newSelected);
       return;
     }
@@ -329,7 +328,7 @@ export default function TableComponent({ tableData }: any) {
 
   const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
     const selectedIndex = selected.indexOf(name);
-    let newSelected: readonly string[] = [];
+    let newSelected: string[] = [];
 
     if (selectedIndex === -1) {
       newSelected = newSelected.concat(selected, name);
@@ -366,7 +365,7 @@ export default function TableComponent({ tableData }: any) {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows!.length) : 0;
 
   return (
     <>
