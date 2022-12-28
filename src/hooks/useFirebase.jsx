@@ -15,7 +15,6 @@ import {
   setDoc,
 } from "firebase/firestore";
 
-
 export default function useFirebase() {
   /* const router = useRouter(); */
 
@@ -36,10 +35,7 @@ export default function useFirebase() {
     }
   };
 
-  const getDoc = async (id) => {
-
-    
-  };
+  const getDoc = async (id) => {};
 
   const addData = async ([data]) => {
     try {
@@ -51,26 +47,27 @@ export default function useFirebase() {
       console.log(error);
     }
   };
-  
+
   const editData = async ([data]) => {
     try {
-     
-
       await setDoc(doc(db, "1", data.id), {
         name: data.name,
         Category: data.Category,
         Abilities: data.Abilities,
-        Weaknesses: data.Weaknesses
+        Weaknesses: data.Weaknesses,
       });
-
-
     } catch (error) {
       console.log("Edit failed! ", error);
-    } 
+    }
   };
 
   const delData = async (id) => {
-    await deleteDoc(doc(db, "1", id));
+    try {
+      await deleteDoc(doc(db, "1", id));
+    } catch (error) {
+      console.log(error);
+      alert("Error in deleting documents");
+    }
   };
 
   return {
