@@ -25,10 +25,8 @@ import { Button } from "@mui/material";
 import Iconify from "./Iconify";
 import CreateIcon from "@mui/icons-material/Create";
 import useFirebase from "../hooks/useFirebase";
-import { useRouter } from 'next/router';
-import goHome from "../hooks/goHome";
-
-
+import { useRouter } from "next/router";
+import LoadingIcon from "./loadingIcon";
 
 const { delData } = useFirebase();
 
@@ -60,8 +58,6 @@ function createData(
   };
 }
 
-const rowsArray: any = [];
-
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -71,17 +67,6 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   }
   return 0;
 }
-
-
-
-function deleteSelected() {
-  //const { directHome } = goHome();
-
-  selectedIdArr.forEach((element) => {
-  delData(element);
-  });
-  //directHome();
-};
 
 type Order = "asc" | "desc";
 
@@ -217,6 +202,13 @@ interface EnhancedTableToolbarProps {
 function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
   const { numSelected } = props;
 
+  function deleteSelected() {
+    selectedIdArr.forEach((element) => {
+      delData(element);
+    });
+    window.location.reload();
+  }
+
   return (
     <Toolbar
       sx={{
@@ -278,12 +270,8 @@ export default function TableComponent({ tableData }: any) {
 
   const passedData = tableData;
   const dataArray = Object.values(passedData);
-  const dataKeys = Object.keys(passedData);
 
   const router = useRouter();
-
-  
-
 
   const populate = () => {
     const rowsArray: any = dataArray.map((item: any) =>
@@ -300,13 +288,10 @@ export default function TableComponent({ tableData }: any) {
   };
 
   const editButton = (value: string) => {
-
-    console.log("Edit Button pressed", value);
     router.push(`/edit/${value}`);
   };
 
   React.useEffect(() => {
-    //console.log(passedData)
     populate();
   }, []);
 
@@ -318,25 +303,7 @@ export default function TableComponent({ tableData }: any) {
       if (!selectedContext.includes(tableData[index].id)) {
         selectedIdArr.push(tableData[index].id);
       }
-
     });
-    /* if (selectedIdArr.length > 0) {
-      selectedIdArr.forEach((element) => {
-        const index = tableData.findIndex((obj) => obj.id == element);
-        const elementIndex = selectedIdArr.indexOf(element);
-        if (!selected.includes(tableData[index].name)) {
-          selectedIdArr.splice(elementIndex, 1);
-        }
-      });
-    } */
-
-    /* selectedContext = selected; */
-    /* console.log("tableData", tableData);
-    console.log("selectedContext armado ", selectedContext);
-    console.log("selected", selected);
-    
- */
-//console.log("selectedIdArr, ", selectedIdArr);                
   }, [selected]);
 
   const handleRequestSort = (
@@ -411,7 +378,7 @@ export default function TableComponent({ tableData }: any) {
 
       {typeof rows === "undefined" ? (
         <>
-          <p>Cargando</p>
+          
         </>
       ) : (
         <>
@@ -445,7 +412,7 @@ export default function TableComponent({ tableData }: any) {
                         const labelId = `enhanced-table-checkbox-${index}`;
 
                         return (
-                          <TableRow hover  key={row.id}>
+                          <TableRow hover key={row.id}>
                             <TableCell
                               padding="checkbox"
                               onClick={(event) => handleClick(event, row.name)}

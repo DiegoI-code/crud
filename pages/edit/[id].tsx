@@ -24,7 +24,6 @@ export default function Edit() {
     if (result) {
 
       const obj = result.find(x => x.id === currentId);
-      //console.log(obj);
       setSelected(obj);
     } else {
       // TODO: show error

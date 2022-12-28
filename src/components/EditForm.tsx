@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useContext } from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -10,19 +11,22 @@ import Iconify from './Iconify';
 import useFirebase from "../hooks/useFirebase";
 import alerts from "./alerts/alerts";
 import { useRouter } from 'next/router'
+//import { GlobalContext } from '../providers/GlobalContextProvider';
 
 
-const { editData } = useFirebase();
 
 export default function EditForm(selected: any) {
-  //console.log("selected in EditForm, ", selected.data);
+  const { editData } = useFirebase();
+  
+/*   const {dataCont} = useContext(GlobalContext);
+  console.log(dataCont); */
+  
   const selectedPok = selected.data;
   const { addDataSuccess } = alerts();
   const [data, setData] = React.useState(selectedPok);
   const [added, setAdded] = React.useState(false);
   const router = useRouter();
 
-  console.log(data);
 
 
   const onChange = (event: any) => {
@@ -32,12 +36,10 @@ export default function EditForm(selected: any) {
       [event.target.name]: event.target.value
     }
     );
-    //console.log(data);
 
 };
 
 const handleClick = () => {
-  //console.log(data);
   editData([data]);
   setAdded(true);
   router.push('/')

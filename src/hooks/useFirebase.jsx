@@ -37,7 +37,6 @@ export default function useFirebase() {
   };
 
   const getDoc = async (id) => {
-    console.log("id en getDoc, ", id);
 
     
   };
@@ -46,7 +45,6 @@ export default function useFirebase() {
     try {
       const col = collection(db, "1");
       const add = await addDoc(col, data);
-      console.log(add.id);
 
       //alert("Pokemon agregado!");
     } catch (error) {
@@ -57,7 +55,6 @@ export default function useFirebase() {
   const editData = async ([data]) => {
     try {
      
-      //console.log("data id en editData, ", data.id);
 
       await setDoc(doc(db, "1", data.id), {
         name: data.name,
@@ -73,7 +70,6 @@ export default function useFirebase() {
   };
 
   const delData = async (id) => {
-    console.log("elemento en delData", id);
     await deleteDoc(doc(db, "1", id));
   };
 

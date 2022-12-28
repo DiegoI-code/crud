@@ -65,7 +65,6 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
 }
 
 function deleteSelected (data: any) {
-  console.log("Deleting ", data);
 }
 
 type Order = "asc" | "desc";
@@ -277,13 +276,11 @@ export default function TableComponent({ tableData }: any) {
   }
 
   const editButton = (value: string) => {
-    console.log("Edit Button pressed", value);
   }
 
  
 
   React.useEffect(() => {
-    //console.log(passedData)
     populate();
   }, []);
   

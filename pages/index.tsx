@@ -3,11 +3,11 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import EnhancedTable from '../src/components/example'
 import PruebaFirebase from '../src/components/PruebaFirebase'
-import { UIProvider } from '../src/providers/UiProvider'
+import GlobalContextProvider from '../src/providers/GlobalContextProvider'
 
 export default function Home() {
   return (
-    <UIProvider>
+    <GlobalContextProvider>
 
     <div className={styles.container}>
       <Head>
@@ -20,6 +20,6 @@ export default function Home() {
 
 
     </div>
-    </UIProvider>
+    </GlobalContextProvider>
   )
 }
