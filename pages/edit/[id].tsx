@@ -1,14 +1,10 @@
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import NewEditForm2 from "../../src/components/NewEditForm2";
-import { useRouter } from "next/router";
-import NextLink from "next/link";
-import { Button } from "@mui/material";
-import Iconify from "../../src/components/Iconify";
 import useFirebase from "../../src/hooks/useFirebase";
 import { useEffect, useState } from "react";
 import EditForm from "../../src/components/EditForm";
 import LoadingIcon from "../../src/components/loadingIcon";
+import { useRouter } from "next/router";
 
 
 // ----------------------------------------------------------------------
@@ -35,7 +31,7 @@ export default function Edit() {
   useEffect(() => {
     fetchData();
     
-  }, [])
+  }, );
   
  
 
@@ -44,11 +40,9 @@ export default function Edit() {
     <>
     <Box sx={{ width: "50%" }}>
     <Paper sx={{ width: "100%", mb: 2 }}>
-    {/* <h1>Edit id {currentId}</h1> */}
     {typeof selected === "undefined" ? (
       <>
         <LoadingIcon/>
-        {/* Aca va un skeleton */}
       </>
     ) : (
       <>
@@ -60,14 +54,7 @@ export default function Edit() {
 
     )}
 
-{/* <NextLink href="/" passHref>
-        <Button
-          variant="contained"
-          startIcon={<Iconify icon="eva:plus-fill" />}
-        >
-          Back to Home
-        </Button>
-      </NextLink> */}
+
       </Paper>
       </Box> 
   </>

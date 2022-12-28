@@ -28,8 +28,6 @@ import useFirebase from "../hooks/useFirebase";
 import { useRouter } from "next/router";
 import LoadingIcon from "./loadingIcon";
 
-const { delData } = useFirebase();
-
 let selectedContext: any[] = [];
 
 let selectedIdArr: any[] = [];
@@ -203,6 +201,7 @@ interface EnhancedTableToolbarProps {
 
 function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
   const { numSelected } = props;
+  const { delData } = useFirebase();
 
   function deleteSelected() {
     selectedIdArr.forEach((element) => {
@@ -379,9 +378,7 @@ export default function TableComponent({ tableData }: any) {
       </NextLink>
 
       {typeof rows === "undefined" ? (
-        <>
-          
-        </>
+        <></>
       ) : (
         <>
           <Box sx={{ width: "100%" }}>

@@ -4,9 +4,10 @@ import LoadingIcon from "./loadingIcon";
 import TableComponent from "./TableComponent";
 
 
-const { getData } = useFirebase();
 
 const PruebaFirebase = () => {
+  
+  const { getData } = useFirebase();
   const [fetchedData, setfetchedData] = useState();
 
   const fetchData = async () => {

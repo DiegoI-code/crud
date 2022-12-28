@@ -9,7 +9,6 @@ import NextLink from 'next/link';
 import { Button } from "@mui/material";
 import Iconify from './Iconify';
 import useFirebase from "../hooks/useFirebase";
-import alerts from "./alerts/alerts";
 import { useRouter } from 'next/router'
 
 
@@ -17,7 +16,6 @@ import { useRouter } from 'next/router'
 export default function EditForm(selected: any) {
   const { editData } = useFirebase();
   const selectedPok = selected.data;
-  const { addDataSuccess } = alerts();
   const [data, setData] = React.useState(selectedPok);
   const [added, setAdded] = React.useState(false);
   const router = useRouter();
