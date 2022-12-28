@@ -274,25 +274,25 @@ export default function TableComponent({ tableData }: any) {
 
   const router = useRouter();
 
-  const populate = () => {
-    const rowsArray: any = dataArray.map((item: any) =>
-      createData(
-        item.id,
-        item.name,
-        item.Category,
-        item.Abilities,
-        item.Weaknesses
-      )
-    );
-
-    setRows(rowsArray);
-  };
-
   const editButton = (value: string) => {
     router.push(`/edit/${value}`);
   };
 
   React.useEffect(() => {
+    const populate = () => {
+      const rowsArray: any = dataArray.map((item: any) =>
+        createData(
+          item.id,
+          item.name,
+          item.Category,
+          item.Abilities,
+          item.Weaknesses
+        )
+      );
+
+      setRows(rowsArray);
+    };
+
     populate();
   }, []);
 
@@ -305,7 +305,7 @@ export default function TableComponent({ tableData }: any) {
         selectedIdArr.push(tableData[index].id);
       }
     });
-  }, [selected]);
+  }, [selected, tableData]);
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
