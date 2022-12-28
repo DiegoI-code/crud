@@ -32,6 +32,15 @@ let selectedContext: any[] = [];
 
 let selectedIdArr: any[] = [];
 
+function MyTableCell(props: any) {
+  return (
+    <TableCell {...props} selected={props.selected}>
+      {props.children}
+    </TableCell>
+  );
+}
+
+
 interface Data {
   id: string;
   name: string;
@@ -412,9 +421,9 @@ export default function TableComponent({ tableData }: any) {
 
                         return (
                           <TableRow hover key={row.id}>
-                            <TableCell
+                            <MyTableCell
                               padding="checkbox"
-                              onClick={(event) => handleClick(event, row.name)}
+                              onClick={(event: any) => handleClick(event, row.name)}
                               role="checkbox"
                               aria-checked={isItemSelected}
                               tabIndex={-1}
@@ -428,7 +437,7 @@ export default function TableComponent({ tableData }: any) {
                                   "aria-labelledby": labelId,
                                 }}
                               />
-                            </TableCell>
+                            </MyTableCell>
                             <TableCell
                               component="th"
                               id={labelId}
