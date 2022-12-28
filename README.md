@@ -1,4 +1,8 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Welcome!
+
+This is a very simple CRUD project of my own, based in a [MUI React enhanced table template](https://github.com/mui/material-ui/blob/v5.10.14/docs/data/material/components/tables/EnhancedTable.tsx).
+
+Using mostly Typescript, and with all data stored in Firebase / Firestore.
 
 ## Getting Started
 
