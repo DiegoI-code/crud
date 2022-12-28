@@ -110,11 +110,11 @@ const handleClick = () => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-        {/* <NextLink href='/' passHref>
+        <NextLink href='/' passHref>
               <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
                 Back to Home
               </Button>
-  </NextLink> */}
+  </NextLink>
               <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />} onClick={handleClick}>
                 Confirm changes!
               </Button>

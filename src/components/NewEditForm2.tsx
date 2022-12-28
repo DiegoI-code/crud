@@ -27,7 +27,6 @@ export default function NewEditForm2() {
   };
 
   const handleClick = () => {
-    //console.log(data);
     addData([data]);
     setAdded(true);
     router.push("/");

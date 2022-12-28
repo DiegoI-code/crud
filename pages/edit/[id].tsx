@@ -8,6 +8,7 @@ import Iconify from "../../src/components/Iconify";
 import useFirebase from "../../src/hooks/useFirebase";
 import { useEffect, useState } from "react";
 import EditForm from "../../src/components/EditForm";
+import LoadingIcon from "../../src/components/loadingIcon";
 
 
 // ----------------------------------------------------------------------
@@ -46,7 +47,7 @@ export default function Edit() {
     {/* <h1>Edit id {currentId}</h1> */}
     {typeof selected === "undefined" ? (
       <>
-        <p>Esperando data de API</p>
+        <LoadingIcon/>
         {/* Aca va un skeleton */}
       </>
     ) : (
@@ -59,14 +60,14 @@ export default function Edit() {
 
     )}
 
-<NextLink href="/" passHref>
+{/* <NextLink href="/" passHref>
         <Button
           variant="contained"
           startIcon={<Iconify icon="eva:plus-fill" />}
         >
           Back to Home
         </Button>
-      </NextLink>
+      </NextLink> */}
       </Paper>
       </Box> 
   </>
