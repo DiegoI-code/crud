@@ -216,7 +216,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
     selectedIdArr.forEach((element) => {
       delData(element);
     });
-    window.location.reload();
+    //window.location.reload();
   }
 
   return (

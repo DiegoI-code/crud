@@ -9,13 +9,14 @@ import { Button } from "@mui/material";
 import Iconify from "./Iconify";
 import useFirebase from "../hooks/useFirebase";
 import { useRouter } from "next/router";
-
+import populateDataMock from "../mock/populateData";
 
 export default function NewEditForm2() {
   const { addData } = useFirebase();
   const [data, setData] = React.useState({});
   const [added, setAdded] = React.useState(false);
   const router = useRouter();
+  const mockData = populateDataMock();
 
   const onChange = (event: any) => {
     setData({
@@ -28,6 +29,32 @@ export default function NewEditForm2() {
     addData([data]);
     setAdded(true);
     router.push("/");
+  };
+
+  const handleClickRepo = () => {
+    /*  console.log(typeof populateDataMock);
+   console.log(mockData); */
+    //console.log(mockData.populateDataMock);
+    mockData.populateDataMock.forEach((element) => {
+      //console.log(element);
+      addData([element]);
+    });
+
+    /*  for (const item of populateDataMock) {
+      console.log(item);
+      
+    } */
+    /*  console.log(populateDataMock);
+    populateDataMock.forEach(element => {
+      console.log(element);
+    }); */
+    /*     populateDataMock.forEach(element => {
+      //addData([element]);
+    });
+    router.push("/"); */
+    /*  addData([data]);
+    setAdded(true);
+    router.push("/"); */
   };
 
   return (
@@ -91,6 +118,13 @@ export default function NewEditForm2() {
             onClick={handleClick}
           >
             Confirm
+          </Button>
+          <Button
+            variant="contained"
+            startIcon={<Iconify icon="eva:plus-fill" />}
+            onClick={handleClickRepo}
+          >
+            Repopulate!
           </Button>
           <NextLink href="/" passHref>
             <Button

@@ -63,7 +63,9 @@ export default function useFirebase() {
 
   const delData = async (id) => {
     try {
+      console.log("id en delData, ", id);
       await deleteDoc(doc(db, "1", id));
+
     } catch (error) {
       console.log(error);
       alert("Error in deleting documents");
