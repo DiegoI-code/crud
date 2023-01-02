@@ -19,8 +19,18 @@ export default function EditForm(selected: any) {
   const [data, setData] = React.useState(selectedPok);
   const [added, setAdded] = React.useState(false);
   const router = useRouter();
+  const [disabled, setDisabled] = React.useState(true);
 
 
+  React.useEffect(() => {
+    console.log(data)
+    if (data.name && data.name != "" && data.Category && data.Category != "" && data.Abilities && data.Abilities != "" && data.Weaknesses && data.Weaknesses != "") {
+      setDisabled(false)
+    } else {
+      setDisabled(true)
+    }
+   
+  }, [data])
 
   const onChange = (event: any) => {
   setData(
@@ -108,7 +118,7 @@ const handleClick = () => {
                 Back to Home
               </Button>
   </NextLink>
-              <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />} onClick={handleClick}>
+              <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />} onClick={handleClick} disabled={disabled}>
                 Confirm changes!
               </Button>
         </Grid>
