@@ -10,29 +10,32 @@ import Iconify from "./Iconify";
 import useFirebase from "../hooks/useFirebase";
 import { useRouter } from "next/router";
 import populateDataMock from "../mock/populateData";
-//import { createTrue } from "typescript";
+
+interface Data {
+  id: string;
+  name: string;
+  Category: string;
+  Abilities: string;
+  Weaknesses: string;
+}
 
 export default function NewEditForm2() {
   const { addData } = useFirebase();
-  const [data, setData] = React.useState({});
+  const [data, setData] = React.useState<Data>();
   const [disabled, setDisabled] = React.useState(true);
   const [added, setAdded] = React.useState(false);
   const router = useRouter();
   const mockData = populateDataMock();
 
-  /* const validateButton = () => {
-   // if (data.name?.length > 0 &&  )
-   console.log(data);
-  } */
 
   React.useEffect(() => {
     console.log(data)
-    if (data.name && data.name != "" && data.Category && data.Category != "" && data.Abilities && data.Abilities != "" && data.Weaknesses && data.Weaknesses != "") {
-      setDisabled(false)
-    } else {
-      setDisabled(true)
-    }
-   
+    if (typeof data != "undefined") {
+      if (data.name && data.name != "" && data.Category && data.Category != "" && data.Abilities && data.Abilities != "" && data.Weaknesses && data.Weaknesses != "") {
+        setDisabled(false)
+      } else {setDisabled(true)}
+    } else {setDisabled(true)}
+       
   }, [data])
   
   
