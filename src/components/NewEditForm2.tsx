@@ -10,19 +10,38 @@ import Iconify from "./Iconify";
 import useFirebase from "../hooks/useFirebase";
 import { useRouter } from "next/router";
 import populateDataMock from "../mock/populateData";
+//import { createTrue } from "typescript";
 
 export default function NewEditForm2() {
   const { addData } = useFirebase();
   const [data, setData] = React.useState({});
+  const [disabled, setDisabled] = React.useState(true);
   const [added, setAdded] = React.useState(false);
   const router = useRouter();
   const mockData = populateDataMock();
 
+  /* const validateButton = () => {
+   // if (data.name?.length > 0 &&  )
+   console.log(data);
+  } */
+
+  React.useEffect(() => {
+    console.log(data)
+    if (data.name && data.name != "" && data.Category && data.Category != "" && data.Abilities && data.Abilities != "" && data.Weaknesses && data.Weaknesses != "") {
+      setDisabled(false)
+    } else {
+      setDisabled(true)
+    }
+   
+  }, [data])
+  
+  
   const onChange = (event: any) => {
     setData({
       ...data,
       [event.target.name]: event.target.value,
     });
+    //validateButton();
   };
 
   const handleClick = () => {
@@ -32,29 +51,10 @@ export default function NewEditForm2() {
   };
 
   const handleClickRepo = () => {
-    /*  console.log(typeof populateDataMock);
-   console.log(mockData); */
-    //console.log(mockData.populateDataMock);
     mockData.populateDataMock.forEach((element) => {
-      //console.log(element);
       addData([element]);
     });
 
-    /*  for (const item of populateDataMock) {
-      console.log(item);
-      
-    } */
-    /*  console.log(populateDataMock);
-    populateDataMock.forEach(element => {
-      console.log(element);
-    }); */
-    /*     populateDataMock.forEach(element => {
-      //addData([element]);
-    });
-    router.push("/"); */
-    /*  addData([data]);
-    setAdded(true);
-    router.push("/"); */
   };
 
   return (
@@ -116,16 +116,17 @@ export default function NewEditForm2() {
             variant="contained"
             startIcon={<Iconify icon="eva:plus-fill" />}
             onClick={handleClick}
+            disabled={disabled}
           >
             Confirm
           </Button>
-          <Button
+          {/* <Button
             variant="contained"
             startIcon={<Iconify icon="eva:plus-fill" />}
             onClick={handleClickRepo}
           >
             Repopulate!
-          </Button>
+          </Button> */}
           <NextLink href="/" passHref>
             <Button
               variant="contained"

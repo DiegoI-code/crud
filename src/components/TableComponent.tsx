@@ -27,6 +27,7 @@ import CreateIcon from "@mui/icons-material/Create";
 import useFirebase from "../hooks/useFirebase";
 import { useRouter } from "next/router";
 import LoadingIcon from "./loadingIcon";
+import populateDataMock from "../mock/populateData";
 
 let selectedContext: any[] = [];
 
@@ -39,7 +40,6 @@ function MyTableCell(props: any) {
     </TableCell>
   );
 }
-
 
 interface Data {
   id: string;
@@ -282,6 +282,8 @@ export default function TableComponent({ tableData }: any) {
   const dataArray = Object.values(passedData);
 
   const router = useRouter();
+  const mockData = populateDataMock();
+  const { addData } = useFirebase();
 
   const editButton = (value: string) => {
     router.push(`/edit/${value}`);
@@ -375,6 +377,13 @@ export default function TableComponent({ tableData }: any) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows!.length) : 0;
 
+  const handleClickRepo = () => {
+    mockData.populateDataMock.forEach((element) => {
+      addData([element]);
+    });
+    router.reload();
+  };
+
   return (
     <>
       <NextLink href="/new" passHref>
@@ -386,8 +395,16 @@ export default function TableComponent({ tableData }: any) {
         </Button>
       </NextLink>
 
-      {typeof rows === "undefined" ? (
-        <></>
+      {rows?.length === 0 || typeof rows === "undefined" ? (
+        <>
+          <Button
+            variant="contained"
+            startIcon={<Iconify icon="eva:plus-fill" />}
+            onClick={handleClickRepo}
+          >
+            Repopulate!
+          </Button>
+        </>
       ) : (
         <>
           <Box sx={{ width: "100%" }}>
@@ -423,7 +440,9 @@ export default function TableComponent({ tableData }: any) {
                           <TableRow hover key={row.id}>
                             <MyTableCell
                               padding="checkbox"
-                              onClick={(event: any) => handleClick(event, row.name)}
+                              onClick={(event: any) =>
+                                handleClick(event, row.name)
+                              }
                               role="checkbox"
                               aria-checked={isItemSelected}
                               tabIndex={-1}
