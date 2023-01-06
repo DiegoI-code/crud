@@ -2,8 +2,6 @@ import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import NextLink from "next/link";
 import { Button } from "@mui/material";
 import Iconify from "./Iconify";
@@ -14,7 +12,12 @@ import populateDataMock from "../mock/populateData";
 
 export default function NewEditForm2() {
   const { addData } = useFirebase();
-  const [data, setData] = React.useState({});
+  const [data, setData] = React.useState({
+    name: '',
+    Category: '',
+    Abilities: '',
+    Weaknesses: ''
+  });
   const [disabled, setDisabled] = React.useState(true);
   const [added, setAdded] = React.useState(false);
   const router = useRouter();

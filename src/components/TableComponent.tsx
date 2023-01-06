@@ -213,6 +213,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
   const { delData } = useFirebase();
 
   function deleteSelected() {
+    console.log("selectedIdArr en deleteSelected ", selectedIdArr);
     selectedIdArr.forEach((element) => {
       delData(element);
     });
@@ -380,8 +381,9 @@ export default function TableComponent({ tableData }: any) {
   const handleClickRepo = () => {
     mockData.populateDataMock.forEach((element) => {
       addData([element]);
+      console.log(element);
     });
-    router.reload();
+    //router.reload();
   };
 
   return (
