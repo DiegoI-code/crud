@@ -21,7 +21,7 @@ interface Data {
 
 export default function NewEditForm2() {
   const { addData } = useFirebase();
-  const [data, setData] = React.useState({});
+  const [data, setData] = React.useState<Data>();
   const [disabled, setDisabled] = React.useState(true);
   const [added, setAdded] = React.useState(false);
   const router = useRouter();
